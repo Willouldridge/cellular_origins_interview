@@ -350,5 +350,37 @@ class TestMarsRoverMethods(unittest.TestCase):
 
         self.assertEqual(self._test_end_to_end_scenario(command_list), ["2,1,SOUTH"])
 
+    def test_end_to_end_scenario_9(self):
+
+        # Tests all possible commands in a long list
+        command_list = [
+            "PLACE 0,0,NORTH", # 0,0,NORTH
+            "MOVE", # 0,1,NORTH
+            "RIGHT", # 0,1,EAST
+            "MOVE", # 1,1,EAST
+            "MOVE", # 2,1,EAST
+            "LEFT", # 2,1,NORTH
+            "LEFT", # 2,1,WEST
+            "LEFT", # 2,1,SOUTH
+            "MOVE", # 2,0,SOUTH
+            "LEFT", # 2,0,EAST
+            "MOVE", # 3,0,EAST
+            "LEFT", # 3,0,NORTH
+            "MOVE", # 3,1,NORTH
+            "MOVE", # 3,2,NORTH
+            "MOVE", # 3,3,NORTH
+            "MOVE", # 3,4,NORTH
+            "MOVE", # 3,4,NORTH - invalid move
+            "RIGHT", # 3,4,EAST
+            "RIGHT", # 3,4,SOUTH
+            "RIGHT", # 3,4,WEST
+            "MOVE", # 2,4,WEST
+            "MOVE", # 1,4,WEST
+            "REPORT"
+        ]
+
+        self.assertEqual(self._test_end_to_end_scenario(command_list), ["1,4,WEST"])
+
+
 if __name__ == '__main__':
     unittest.main()
