@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Tuple
 import logging
 
 class Direction(Enum):
@@ -44,7 +45,7 @@ class MarsRover(object):
         self.logger.info('Initialised Mars Rover, board dimensions {} x {}'
                     .format(self.x_max, self.y_max))
 
-    def _parse_place_command(self, command):
+    def _parse_place_command(self, command: str) -> Tuple[int, int, str]:
         """Parse a PLACE command. The command must take the format:
             'PLACE X,Y,F'
            where X,Y are integer coordinates and F is a direction (e.g. NORTH).
@@ -111,7 +112,7 @@ class MarsRover(object):
                          .format(x_pos, y_pos, facing))
         return True
 
-    def _turn_rover(self, command: str) -> int:
+    def _turn_rover(self, command: str) -> bool:
         """Turn the rover left or right through 90 degrees to face a new direction.
 
         Returns True if the turn command is valid and the rover has been turned
