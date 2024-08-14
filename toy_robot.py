@@ -230,9 +230,11 @@ class MarsRover(object):
                 if args_tuple is None or not self._place_rover(args_tuple[0], args_tuple[1], args_tuple[2]):
                     self.logger.error("Invalid PLACE command will be ignored")
             case "MOVE":
-                self._move_rover()
+                if not self._move_rover():
+                    self.logger.error("Invalid MOVE command will be ignored")
             case "LEFT" | "RIGHT":
-                self._turn_rover(command)
+                if not self._turn_rover(command):
+                    self.logger.error("Invalid turn command will be ignored")
             case "REPORT":
                 return(self._report())
             case _:
